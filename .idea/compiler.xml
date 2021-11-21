@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="reqres" />
+        <module name="Automation-test-with-REST-Assured" />
       </profile>
     </annotationProcessing>
   </component>
