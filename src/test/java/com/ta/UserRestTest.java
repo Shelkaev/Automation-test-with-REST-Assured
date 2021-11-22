@@ -5,11 +5,13 @@ import java.util.*;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
 import com.ta.steps.TestParameters;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class UserRestTest extends TestParameters {
 
     @Test
+    @Tag("positive")
     public void getUserTest() {
         UserPojo user = testSteps.getUser();
         Object [] expectedParameters = new Object[] {2, "janet.weaver@reqres.in", "Janet", "Weaver"};
@@ -17,6 +19,7 @@ public class UserRestTest extends TestParameters {
         assertArrayEquals(expectedParameters, user.toList());
     }
     @Test
+    @Tag("positive")
     public void getListUsersTest() {
         List<UserPojo> users = testSteps.getListUsers();
         Object [] expectedParameters = new Object[] {1, "george.bluth@reqres.in", "George", "Bluth"};
@@ -26,6 +29,7 @@ public class UserRestTest extends TestParameters {
     }
 
     @Test
+    @Tag("negative")
     public void notFoundUserTest(){
         given()
                 .spec(testSteps.getRequestSpecification())
@@ -35,6 +39,7 @@ public class UserRestTest extends TestParameters {
     }
 
     @Test
+    @Tag("positive")
     public void createUserTest(){
         RequestUserPojo requestedUser = testSteps.generateUser("Grigory", "driver");
         ResponsePostUserPojo respondedUser = testSteps.createUser(requestedUser);
@@ -44,6 +49,7 @@ public class UserRestTest extends TestParameters {
     }
 
     @Test
+    @Tag("positive")
     public void putUpdateUserTest(){
         RequestUserPojo requestedUser = testSteps.generateUser("morpheus", "leader");
         UpdateUserPojo respondedUser = testSteps.putUpdateUser(requestedUser);
@@ -53,6 +59,7 @@ public class UserRestTest extends TestParameters {
     }
 
     @Test
+    @Tag("positive")
     public void patchUpdateUserTest(){
         RequestUserPojo requestedUser = testSteps.generateUser("morpheus", "leader");
         UpdateUserPojo respondedUser = testSteps.patchUpdateUser(requestedUser);
@@ -62,6 +69,7 @@ public class UserRestTest extends TestParameters {
     }
 
     @Test
+    @Tag("positive")
     public void deleteUserTest(){
         given()
                 .spec(testSteps.getRequestSpecification())
