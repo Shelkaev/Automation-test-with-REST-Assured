@@ -12,19 +12,19 @@ public class LoginRestTest extends TestParameters {
     @Test
     @Tag("positive")
     public void successLoginTest(){
-        RequestLoginPojo requestLogin = testSteps.generateLogin("eve.holt@reqres.in", "cityslicka");
-        ResponseAuthorizationPojo respondedParameters = testSteps.authorizationRequest(requestLogin);
+        RequestLoginPojo createNewUserParameters = testSteps.generateLogin("eve.holt@reqres.in", "cityslicka");
+        ResponseAuthorizationPojo respondedParameters = testSteps.authorizationRequest(createNewUserParameters);
 
         assertNotNull(respondedParameters.getToken());
     }
     @Test
     @Tag("negative")
     public void unSuccessLoginTest(){
-        RequestLoginPojo requestLogin = testSteps.generateLogin("eve.holt@reqres.in", "");
+        RequestLoginPojo createNewUserParameters = testSteps.generateLogin("eve.holt@reqres.in", "");
         given()
                 .spec(testSteps.getRequestSpecification())
                 .basePath("/login")
-                .body(requestLogin)
+                .body(createNewUserParameters)
                 .post()
                 .then().statusCode(400);
     }

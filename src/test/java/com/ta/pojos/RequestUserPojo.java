@@ -14,6 +14,7 @@ public class RequestUserPojo extends AbstractPojo {
     public Object[] toList() {
         return new Object[]{name, job};
     }
+
     public boolean isSameDate(LocalDateTime date){
         return createdAt.minusSeconds(20).isBefore(date)
                 && createdAt.plusSeconds(20).isAfter(date);

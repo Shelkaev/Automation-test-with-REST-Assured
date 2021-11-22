@@ -26,6 +26,7 @@ public class TestSteps {
                 .then().statusCode(200)
                 .extract().jsonPath().getObject("data", pojoClass.getClass());
     }
+
     private List<? extends AbstractPojo> getListPojoFromRequest(String basePath, AbstractPojo pojoClass ) {
         return  given()
                 .spec(REQUEST_SPECIFICATION)
@@ -34,6 +35,7 @@ public class TestSteps {
                 .then().statusCode(200)
                 .extract().jsonPath().getList("data", pojoClass.getClass());
     }
+
     private AbstractPojo getPojoFromPostRequest(AbstractPojo request, String basePath, int statusCode, AbstractPojo pojoClass){
         return given()
                 .spec(REQUEST_SPECIFICATION)
@@ -44,17 +46,18 @@ public class TestSteps {
                 .extract().as(pojoClass.getClass());
    }
 
-    public UserPojo getUser(){
+    public UserPojo getUser() {
        return (UserPojo) getPojoFromRequest("/users/2", new UserPojo());
    }
 
-    public ResourcePojo getResource(){
+    public ResourcePojo getResource() {
         return (ResourcePojo) getPojoFromRequest("/unknown/2", new ResourcePojo());
     }
 
     public List<UserPojo> getListUsers(){
        return (List<UserPojo>) getListPojoFromRequest("/users", new UserPojo());
     }
+
     public List<ResourcePojo> getListResources(){
         return (List<ResourcePojo>) getListPojoFromRequest("/unknown", new ResourcePojo());
     }

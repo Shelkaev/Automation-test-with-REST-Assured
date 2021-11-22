@@ -12,20 +12,26 @@ public class UserRestTest extends TestParameters {
 
     @Test
     @Tag("positive")
-    public void getUserTest() {
-        UserPojo user = testSteps.getUser();
+    public void getUserParametersTest() {
+        UserPojo userParameters = testSteps.getUser();
         Object [] expectedParameters = new Object[] {2, "janet.weaver@reqres.in", "Janet", "Weaver"};
 
-        assertArrayEquals(expectedParameters, user.toList());
+        assertArrayEquals(expectedParameters, userParameters.toList());
     }
     @Test
     @Tag("positive")
     public void getListUsersTest() {
-        List<UserPojo> users = testSteps.getListUsers();
-        Object [] expectedParameters = new Object[] {1, "george.bluth@reqres.in", "George", "Bluth"};
+        List<UserPojo> listUserParameters = testSteps.getListUsers();
+        Object [] [] expectedParameters = new Object[][] {
+                {1, "george.bluth@reqres.in", "George", "Bluth"},
+                {2, "janet.weaver@reqres.in", "Janet", "Weaver"},
+                {3, "emma.wong@reqres.in", "Emma", "Wong"},
+                {4, "eve.holt@reqres.in", "Eve", "Holt"},
+                {5, "charles.morris@reqres.in", "Charles", "Morris"},
+                {6, "tracey.ramos@reqres.in", "Tracey", "Ramos"}
+        };
 
-        assertEquals(6, users.size());
-        assertArrayEquals(expectedParameters, users.get(0).toList());
+        assertAllArrayEquals(expectedParameters, listUserParameters);
     }
 
     @Test
@@ -41,31 +47,31 @@ public class UserRestTest extends TestParameters {
     @Test
     @Tag("positive")
     public void createUserTest(){
-        RequestUserPojo requestedUser = testSteps.generateUser("Grigory", "driver");
-        ResponsePostUserPojo respondedUser = testSteps.createUser(requestedUser);
+        RequestUserPojo newUserParameters = testSteps.generateUser("Grigory", "driver");
+        ResponsePostUserPojo respondedUser = testSteps.createUser(newUserParameters);
 
-        assertArrayEquals(requestedUser.toList(), respondedUser.toList());
-        assertTrue(requestedUser.isSameDate(respondedUser.getCreatedAt()));
+        assertArrayEquals(newUserParameters.toList(), respondedUser.toList());
+        assertTrue(newUserParameters.isSameDate(respondedUser.getCreatedAt()));
     }
 
     @Test
     @Tag("positive")
     public void putUpdateUserTest(){
-        RequestUserPojo requestedUser = testSteps.generateUser("morpheus", "leader");
-        UpdateUserPojo respondedUser = testSteps.putUpdateUser(requestedUser);
+        RequestUserPojo newUserParameters = testSteps.generateUser("morpheus", "leader");
+        UpdateUserPojo respondedUser = testSteps.putUpdateUser(newUserParameters);
 
-        assertArrayEquals(requestedUser.toList(), respondedUser.toList());
-        assertTrue(requestedUser.isSameDate(respondedUser.getUpdatedAt()));
+        assertArrayEquals(newUserParameters.toList(), respondedUser.toList());
+        assertTrue(newUserParameters.isSameDate(respondedUser.getUpdatedAt()));
     }
 
     @Test
     @Tag("positive")
     public void patchUpdateUserTest(){
-        RequestUserPojo requestedUser = testSteps.generateUser("morpheus", "leader");
-        UpdateUserPojo respondedUser = testSteps.patchUpdateUser(requestedUser);
+        RequestUserPojo newUserParameters = testSteps.generateUser("morpheus", "leader");
+        UpdateUserPojo respondedUser = testSteps.patchUpdateUser(newUserParameters);
 
-        assertArrayEquals(requestedUser.toList(), respondedUser.toList());
-        assertTrue(requestedUser.isSameDate(respondedUser.getUpdatedAt()));
+        assertArrayEquals(newUserParameters.toList(), respondedUser.toList());
+        assertTrue(newUserParameters.isSameDate(respondedUser.getUpdatedAt()));
     }
 
     @Test

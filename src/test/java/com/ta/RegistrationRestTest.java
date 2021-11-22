@@ -13,8 +13,8 @@ public class RegistrationRestTest extends TestParameters {
     @Test
     @Tag("positive")
     public void successRegistrationTest(){
-        RequestLoginPojo requestLogin = testSteps.generateLogin("eve.holt@reqres.in", "pistol");
-        ResponseRegistrationPojo respondedParameters = testSteps.registrationRequest(requestLogin);
+        RequestLoginPojo createNewUserParameters = testSteps.generateLogin("eve.holt@reqres.in", "pistol");
+        ResponseRegistrationPojo respondedParameters = testSteps.registrationRequest(createNewUserParameters);
 
         assertTrue(respondedParameters.getId() > 0);
         assertNotNull(respondedParameters.getToken());
@@ -22,12 +22,12 @@ public class RegistrationRestTest extends TestParameters {
     @Test
     @Tag("negative")
     public void unSuccessRegistrationTest(){
-        RequestLoginPojo requestLogin = testSteps.generateLogin("eve.holt@reqres.in", "");
+        RequestLoginPojo createNewUserParameters = testSteps.generateLogin("eve.holt@reqres.in", "");
 
         given()
                 .spec(testSteps.getRequestSpecification())
                 .basePath("/register")
-                .body(requestLogin)
+                .body(createNewUserParameters)
                 .post()
                 .then().statusCode(400);
     }
